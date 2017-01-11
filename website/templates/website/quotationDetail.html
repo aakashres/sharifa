@@ -1,0 +1,76 @@
+{% extends 'layouts/admin/base.html' %}
+
+{% block head_title %}
+    Quotation Detail
+{% endblock %}
+
+{% block content %}
+<section>
+<div class="section-body contain-lg">
+    <div class="card">
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Requested Product</td>
+                        <td>{{quotation.requested_product}}</td>
+                    </tr>
+                    <tr>
+                        <td>Quoted By</td>
+                        <td>{{quotation.quoted_by}}</td>
+                    </tr>
+                    <tr>
+                        <td>Link</td>
+                        <td><a href="{{quotation.link}}" target="_blank">{{quotation.link}}</a></td>
+                    </tr>
+                    <tr>
+                        <td>Category</td>
+                        <td><a href="{% url 'website:itemCategoryDetail' quotation.category.slug %}"</a> {{quotation.category}}</td>
+                    </tr>
+                    <tr>
+                        <td>Price</td>
+                        <td>Rs. {{quotation.price}}</td>
+                    </tr>
+                    <tr>
+                        <td>Sales Tax</td>
+                        <td>{{quotation.approx_taxes}} %</td>
+                    </tr>
+                    <tr>
+                        <td>Somestic Shipping</td>
+                        <td>Rs. {{quotation.domestic_shipping}}</td>
+                    </tr>
+                    <tr>
+                        <td>Height</td>
+                        <td>{{quotation.height}}</td>
+                    </tr>
+                    <tr>
+                        <td>Lenght</td>
+                        <td>{{quotation.length}}</td>
+                    </tr>
+                    <tr>
+                        <td>Width</td>
+                        <td>{{quotation.width}}</td>
+                    </tr>
+                    <tr>
+                        <td>Weight</td>
+                        <td>{{quotation.weight}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</section>
+{% endblock %}
+
+{% block extra_js%}
+<script type="text/javascript">
+    $('#quotation').addClass('active')
+</script>
+{% endblock %}

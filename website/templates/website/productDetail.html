@@ -1,0 +1,88 @@
+{% extends 'layouts/admin/base.html' %}
+
+{% block head_title %}
+    Product Detail
+{% endblock %}
+
+{% block content %}
+<section>
+<div class="section-body contain-lg">
+    <div class="card">
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Country</td>
+                        <td>Nepal</td>
+                    </tr>
+                    <tr>
+                        <td>Title</td>
+                        <td>{{product.title}}</td>
+                    </tr>
+                    <tr>
+                        <td>Slug</td>
+                        <td>{{product.slug}}</td>
+                    </tr>
+                    <tr>
+                        <td>Link</td>
+                        <td><a href="{{product.link}}" target="_blank">{{product.link}}</a></td>
+                    </tr>
+                    <tr>
+                        <td>Category</td>
+                        <td><a href="{% url 'website:itemCategoryDetail' product.category.slug %}"</a> {{product.category}}</td>
+                    </tr>
+                    <tr>
+                        <td>Price</td>
+                        <td>Rs. {{product.price}}</td>
+                    </tr>
+                    <tr>
+                        <td>Sales Tax</td>
+                        <td>{{product.approx_taxes}} %</td>
+                    </tr>
+                    <tr>
+                        <td>Somestic Shipping</td>
+                        <td>Rs. {{product.domestic_shipping}}</td>
+                    </tr>
+                    <tr>
+                        <td>Height</td>
+                        <td>{{product.height}}</td>
+                    </tr>
+                    <tr>
+                        <td>Lenght</td>
+                        <td>{{product.length}}</td>
+                    </tr>
+                    <tr>
+                        <td>Width</td>
+                        <td>{{product.width}}</td>
+                    </tr>
+                    <tr>
+                        <td>Weight</td>
+                        <td>{{product.weight}}</td>
+                    </tr>
+                    <tr>
+                        <td>Description</td>
+                        <td>{{product.description}}</td>
+                    </tr>
+                    <tr>
+                        <td>Image</td>
+                        <td><img src="{{product.photo.url}}"/ height="250px"> </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</section>
+{% endblock %}
+
+{% block extra_js%}
+<script type="text/javascript">
+    $('#product').addClass('active')
+</script>
+{% endblock %}

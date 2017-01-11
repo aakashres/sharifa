@@ -1,0 +1,93 @@
+{% extends 'layouts/frontend/base.html' %}
+{% load staticfiles %}
+
+
+{% block breadcrumb %}
+<div class="page-title" style="background-image: url('{% static "frontend-assets/images/title/bg01.jpg" %}')">
+  <div class="container">
+    <h1 class="entry-title"> Request Product </h1>
+    <ol class="breadcrumb">
+      <li><a href="#">Home</a></li>
+      <li class="active"> Requset Product</li>
+    </ol>
+  </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<section class="request parallax-window" data-parallax="scroll" data-image-src="{% static 'frontend-assets/images/request/request_bg.jpg' %}">
+  <div class="container">
+    <div class="row">
+      <div class="request-content col-xl-6 col-xl-offset-6">
+        <div class="custom-heading part-heading">
+          <h2>REQUEST A PRODUCT QUOTE</h2>
+        </div>
+        <p>We love to listen and we are eagerly waiting to talk to you regarding your project. Get in touch with us if you have any queries and we will get back to you as soon as possible.</p>
+        <div class="request-form container">
+          <form action="." method="POST" accept-charset="utf-8">
+             {% csrf_token %}
+          <div class="row">
+            <div class="col-lg-12">
+                {{form.title}}
+            </div>
+            <div class="col-lg-12">
+              {{form.link}}
+            </div>
+            <div class="col-lg-12">
+                {{form.number}}
+            </div>
+            <div class="col-lg-12">
+                {{form.remarks}}
+            </div>
+            <div class="col-xs-12">
+              <input class="btn btn-primary" type="submit" value="REQUEST">
+            </div>
+          </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="info">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="custom-heading part-heading three-slashes">
+          <h2>Request Product List</h2>
+          <div class="table-responsive table-shopping-cart">
+          <table class="table">
+            <thead class="thead-inverse">
+            <tr>
+              <th class="text-left">Product Title</th>
+              <th class="text-left">Link</th>
+              <th class="text-left">Status</th>
+              <th class="text-left">Quantity</th>
+              <th class="text-center">Remove</th>
+            </tr>
+            </thead>
+            <tbody>
+              {% for requestedProduct in requestedProducts %}
+              <tr class="row-xs-center">
+                <td class="product-title">{{requestedProduct.title}} </td>
+                <td class="product-link"><a href="{{requestedProduct.link}}">{{requestedProduct.link}}</a></td>
+                <td class="product-qty">{% if requestedProduct.quoted %}<span class="label label-success" >Quoted</span>{% else %} <span class="label label-danger" >Not Quoted</span>{% endif %}  {% if requestedProduct.quoted %}<a href="{% url 'website:userQuotationDetail' requestedProduct.quotation.id %}">View Quotation</a>{% endif %}</td>
+                <td class="product-qty">{{requestedProduct.number}}</td>
+                <td class="text-xs-left product-remove">
+                    <i class="fa fa-close"></i>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

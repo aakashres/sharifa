@@ -1,0 +1,120 @@
+{% extends 'layouts/frontend/base.html' %}
+{% load staticfiles %}
+
+
+{% block breadcrumb %}
+<div class="page-title" style="background-image: url('{% static "frontend-assets/images/title/bg01.jpg" %}')">
+  <div class="container">
+    <h1 class="entry-title"> {{itemCategory.title}} </h1>
+    <ol class="breadcrumb">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Categories</a></li>
+      <li class="active"> {{itemCategory.title}}</li>
+    </ol>
+  </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<section class="info-no-padding">
+  <div class="container">
+    <div class="row">
+        <div class="custom-heading part-heading three-slashes">
+          <h2>CATEGORY DETAIL</h2>
+        </div>
+      <div class="col-lg-12">
+      <table class="table table-reflow table-responsive table-sm table-cart-totals">
+        <thead>
+        <tr>
+          <th>Country:</th>
+          <th>Title:</th>
+          <th>Harmony Code:</th>
+          <th>Popularity:</th>
+          <th>Percent Rate:</th>
+          <th>Flat Rate:</th>
+          <th>Volumetric Rate:</th>
+          <th>ECS:</th>
+          <th>VAT:</th>
+          <th>Description:</th>
+          
+        </tr>
+        </thead>
+        <tbody>
+        <tr scope="row">
+          <td>Nepal</td>
+          <td>{{itemCategory.title}}</td>
+          <td>{{itemCategory.harmony_code}}</td>
+          <td>{{itemCategory.popularity}}</td>
+          <td>{{itemCategory.percent_rate}}%</td>
+          <td>Rs. {{itemCategory.flat_rate}}</td>
+          <td>Rs. {{itemCategory.volume_rate}}</td>
+          <td>{{itemCategory.ecs}}%</td>
+          <td>{{itemCategory.vat}}%</td>
+          <td>{{itemCategory.description}}
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="custom-heading part-heading three-slashes">
+        <h2>Price Estimation</h2>
+      </div>
+      <form action="." method="POST">
+      {% csrf_token %}
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="form-group">
+            {{form.price}}
+            </div>
+            <div class="form-group">
+            {{form.sales_tax}}
+            </div>
+            <div class="form-group">
+            {{form.domestic_shipping}}
+            </div>
+            <div class="form-group">
+            {{form.shipping_type}}
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="form-group">
+            {{form.weight}}
+            </div>
+            <div class="form-group">
+            {{form.length}}
+            </div>
+            <div class="form-group">
+            {{form.width}}
+            </div>
+            <div class="form-group">
+            {{form.height}}
+            </div>
+          </div>
+          <div class="col-lg-12">
+          <button type="submit" class=" text-xs-center btn btn-primary">CALCULATE</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<section class="advisory" style="margin-top:10px;">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10">
+        <h2>Not sure which solution fits you business needs?</h2>
+      </div>
+      <div class="col-md-2">
+        <button type="button" onclick="window.location.href='{% url "website:contact" %}'" class="btn btn-primary">CONTACT US<i class="fa fa-map-marker"></i></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

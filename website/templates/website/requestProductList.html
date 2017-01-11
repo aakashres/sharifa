@@ -1,0 +1,124 @@
+{% extends 'layouts/admin/base.html' %}
+{% load staticfiles %}
+
+{% block head_title %}
+    Requested Product List
+{% endblock %}
+
+{%block extra_head %}
+<link type="text/css" rel="stylesheet" href="{% static 'assets/css/theme-default/libs/DataTables/jquery.dataTables.css' %}" />
+<link type="text/css" rel="stylesheet" href="{% static 'assets/css/theme-default/libs/DataTables/extensions/dataTables.colVis.css' %}" />
+<link type="text/css" rel="stylesheet" href="{% static 'assets/css/theme-default/libs/DataTables/extensions/dataTables.tableTools.css' %}" />
+{% endblock %}
+
+{% block content %}
+<section>
+<div class="section-body">
+<h2>Requested Product List</h2>
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="table-responsive">
+                        <table id="datatable1" class="table table-striped table-hover" style="margin-bottom:20px">
+                            <thead>
+                                <tr>
+                                    <th class="sort-alpha">Requested Product</th>
+                                    <th class="sort-alpha">Requested User</th>
+                                    <th class="sort-alpha" >Link</th>
+                                    <th class="sort-alpha" >Membership</th>
+                                    <th class="sort-numeric" >Number</th>
+                                    <th class="sort-numeric" >Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for requestProduct in requestProducts %}
+                                    <tr>
+                                        <td>{{requestProduct.title}}</td>
+                                        <td>{{requestProduct.user.username}}</td>
+                                        <td><a href="{{requestedProduct}}" target="_blank">{{requestProduct.link}}</a></td>
+                                        <td>{{requestProduct.membership}}</td>
+                                        <td>{{requestProduct.number}}</td>
+                                        <td>
+                                        {% if requestProduct.quoted %}
+                                        <span class="label label-success">Quoted</span>
+                                        {% else %}<span class="label label-danger">Not Quoted</span>
+                                        {% endif %}
+                                        </td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-sm">Action</button>
+                                                <button type="button" class="btn btn-sm dropdown-toggle" data-toggle="dropdown"><i class="fa fa-caret-down"></i></button>
+                                                <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                                                    <li><a href="{% url 'website:quotationCreate' requestProduct.id %}"><i class="fa fa-edit"></i> Create Quotation</a></li>
+                                                    <li><a href="{% url 'website:requestProductDelete' requestProduct.id %}"><i class="fa fa-trash"></i> Delete</a></li>
+                                                </ul>
+                                            </div>
+                                        </td>
+
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div><!--end .table-responsive -->
+                </div><!--end .col -->
+            </div><!--end .row -->
+        </div>
+    </div>
+</div>
+<br/>
+</section>
+{% endblock %}
+
+{% block extra_js%}
+<script type="text/javascript">
+    $('#requestProduct').addClass('active')
+</script>>
+<script src="{% static 'assets/js/libs/DataTables/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'assets/js/libs/DataTables/extensions/ColVis/js/dataTables.colVis.min.js' %}"></script>
+<script src="{% static 'assets/js/libs/DataTables/extensions/TableTools/js/dataTables.tableTools.min.js' %}"></script>
+<script type='text/javascript'>
+(function(namespace, $) {
+    "use strict";
+    var DemoTableDynamic = function() {
+        var o = this;
+        $(document).ready(function() {
+            o.initialize();
+        });
+
+    };
+    var p = DemoTableDynamic.prototype;
+    p.initialize = function() {
+        this._initDataTables();
+    };
+    p._initDataTables = function() {
+        if (!$.isFunction($.fn.dataTable)) {
+            return;
+        }
+        this._createDataTable1();
+    };
+
+    p._createDataTable1 = function() {
+        $('#datatable1').DataTable({
+            "dom": 'lCfrtip',
+            "order": [],
+            "colVis": {
+                "buttonText": "Columns",
+                "overlayFade": 0,
+                "align": "right"
+            },
+            "language": {
+                "lengthMenu": '_MENU_ entries per page',
+                "search": '<i class="fa fa-search"></i>',
+                "paginate": {
+                    "previous": '<i class="fa fa-angle-left"></i>',
+                    "next": '<i class="fa fa-angle-right"></i>'
+                }
+            }
+        });
+    };
+    namespace.DemoTableDynamic = new DemoTableDynamic;
+}(this.materialadmin, jQuery)); // pass in (namespace, jQuery):
+</script>
+{% endblock %}

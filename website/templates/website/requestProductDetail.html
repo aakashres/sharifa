@@ -1,0 +1,61 @@
+{% extends 'layouts/admin/base.html' %}
+
+{% block head_title %}
+    requestedproduct Detail
+{% endblock %}
+
+{% block content %}
+<section>
+<div class="section-body contain-lg">
+    <div class="card">
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Requested By</td>
+                        <td>{{requestedproduct.user}}</td>
+                    </tr>
+                    <tr>
+                        <td>Membership</td>
+                        <td>{{requestedproduct.membership}}</td>
+                    </tr>
+                    <tr>
+                        <td>Title</td>
+                        <td>{{requestedproduct.title}}</td>
+                    </tr>
+                    <tr>
+                        <td>Link</td>
+                        <td><a href="{{requestedproduct.link}}" target="_blank">{{requestedproduct.link}}</a></td>
+                    </tr>
+                    <tr>
+                        <td>Number</td>
+                        <td>{{requestedproduct.number}}</td>
+                    </tr>
+                    <tr>
+                        <td>Quoted</td>
+                        <td>
+                            {% if requestproduct.quoted %}
+                            <span class="label label-success">Quoted</span>
+                            {% else %}<span class="label label-danger">Not Quoted</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</section>
+{% endblock %}
+
+{% block extra_js%}
+<script type="text/javascript">
+    $('#requestProduct').addClass('active')
+</script>
+{% endblock %}

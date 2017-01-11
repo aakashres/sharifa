@@ -1,0 +1,20 @@
+{% extends 'layouts/frontend/base.html' %}
+
+{% block content%}
+{{userProfile.user.username}}
+{{userProfile.user.first_name}}
+{{userProfile.user.last_name}}
+{{userProfile.user.email}}
+
+{% if userProfile.photo %}
+{{userProfile.photo}}
+{%endif%}
+
+<form action="." method="POST" accept-charset="utf-8" enctype="multipart/form-data">
+     {% csrf_token %}
+    {{userForm.as_p}}
+    {{profileForm.as_p}}
+    <input type="submit" name="submit" value="Update" placeholder="">
+</form>
+
+{% endblock content%}

@@ -1,0 +1,72 @@
+{% extends 'layouts/admin/base.html' %}
+
+{% block head_title %}
+    Item Category Detail
+{% endblock %}
+
+{% block content %}
+<section>
+<div class="section-body contain-lg">
+    <div class="card">
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Country</td>
+                        <td>Nepal</td>
+                    </tr>
+                    <tr>
+                        <td>Title</td>
+                        <td>{{itemcategory.title}}</td>
+                    </tr>
+                    <tr>
+                        <td>Harmony Code</td>
+                        <td>{{itemcategory.harmony_code}}</td>
+                    </tr>
+                    <tr>
+                        <td>Flat Rate</td>
+                        <td>Rs. {{itemcategory.flat_rate}}</td>
+                    </tr>
+                    <tr>
+                        <td>Percent Rate</td>
+                        <td>{{itemcategory.percent_rate}} %</td>
+                    </tr>
+                    <tr>
+                        <td>Volumetric Rate</td>
+                        <td>Rs. {{itemcategory.volume_rate}}</td>
+                    </tr>
+                    <tr>
+                        <td>ECS</td>
+                        <td>Rs. {{itemcategory.ecs}}</td>
+                    </tr>
+                    <tr>
+                        <td>VAT</td>
+                        <td>{{itemcategory.vat}} %</td>
+                    </tr>
+                    <tr>
+                        <td>Popularity</td>
+                        <td>{{itemcategory.popularity}}</td>
+                    </tr>
+                    <tr>
+                        <td>Description</td>
+                        <td>{{itemcategory.description}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</section>
+{% endblock %}
+
+{% block extra_js%}
+<script type="text/javascript">
+    $('#itemCategory').addClass('active')
+</script>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "account/base.html" %}
+{% load staticfiles %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "Signup" %}{% endblock %}
+
+{% block breadcrumb %}
+<div class="page-title" style="background-image: url('{% static "frontend-assets/images/title/bg01.jpg" %}')">
+  <div class="container">
+    <h1 class="entry-title">Sign Up</h1>
+    <ol class="breadcrumb">
+      <li><a href="#">Home</a></li>
+      <li class="active">Sign Up</li>
+    </ol>
+  </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-lg-6 col-lg-offset-3">
+      <div class="custom-heading part-heading three-slashes">
+        <h2>{% trans "Sign Up" %}</h2>
+        <p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
+        <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+          {% csrf_token %}
+          {{ form.as_p }}
+          {% if redirect_field_value %}
+          <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+          {% endif %}
+          <button class="btn btn-primary" type="submit">{% trans "Sign Up" %}</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

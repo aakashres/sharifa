@@ -1,0 +1,13 @@
+{% extends 'layouts/frontend/base.html' %}
+
+{% block content%}
+{{userProfile.user.username}}
+{{userProfile.user.first_name}}
+{{userProfile.user.last_name}}
+{{userProfile.user.email}}
+
+{% if userProfile.photo %}
+{{userProfile.photo}}
+{%endif%}
+
+{% endblock content%}

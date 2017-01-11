@@ -1,0 +1,27 @@
+{% extends 'layouts/admin/base.html' %}
+
+{% block head_title %}
+    Product Create
+{% endblock %}
+
+{% block content %}
+<section>
+<div class="section-body contain-lg">
+    <div class="card">
+        <div class="card-body">
+            <form action="" method="POST" accept-charset="utf-8" enctype="multipart/form-data">
+                 {% csrf_token %}
+                {{form.as_p}}
+                <button class="btn ink-reaction btn-primary btn-raised" type="submit">Create</button>
+            </form>
+        </div>
+    </div>
+</div>
+</section>
+{% endblock %}
+
+{% block extra_js%}
+<script type="text/javascript">
+    $('#product').addClass('active')
+</script>
+{% endblock %}

@@ -1,0 +1,82 @@
+{% extends 'layouts/frontend/base.html' %}
+{% load staticfiles %}
+
+
+{% block breadcrumb %}
+<div class="page-title" style="background-image: url('{% static "frontend-assets/images/title/bg01.jpg" %}')">
+  <div class="container">
+    <h1 class="entry-title"> Quotation </h1>
+    <ol class="breadcrumb">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Request Product</a></li>
+      <li class="active">Quotation</li>
+    </ol>
+  </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<section class="info-no-padding">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="custom-heading part-heading three-slashes">
+          <h2>Requested Product</h2>
+          <div class="table-responsive table-shopping-cart">
+          <table class="table">
+            <thead class="thead-inverse">
+            <tr>
+              <th class="text-left">Product Title</th>
+              <th class="text-left">Product Remark</th>
+              <th class="text-left">Link</th>
+              <th class="text-left">Status</th>
+              <th class="text-left">Quantity</th>
+            </tr>
+            </thead>
+            <tbody>
+              <tr class="row-xs-center">
+                <td class="product-title">{{quotation.requested_product.title}}</td>
+                <td class="product-title">{{quotation.requested_product.remark}}</td>
+                <td class="product-link"><a href="{{quotation.requested_product.link}}">{{quotation.requested_product.link}}</a></td>
+                <td class="product-qty">{% if quotation.requested_product.quoted %}<span class="label label-success" >Quoted</span>{% else %} <span class="label label-danger" >Not Quoted</span>{% endif %}</td>
+                <td class="product-qty">{{quotation.requested_product.number}}</td>
+              </tr>
+            </tbody>
+          </table>
+          </div>
+        </div>
+        <div class="custom-heading part-heading three-slashes">
+          <h2>Quotation</h2>
+          <div class="table-responsive table-shopping-cart">
+          <table class="table">
+            <thead class="thead-inverse">
+            <tr>
+              <th class="text-left">Product Title</th>
+              <th class="text-left">Link</th>
+              <th class="text-left">Status</th>
+              <th class="text-left">Quantity</th>
+              <th class="text-center">Remove</th>
+            </tr>
+            </thead>
+            <tbody>
+              {% for requestedProduct in requestedProducts %}
+              <tr class="row-xs-center">
+                <td class="product-title">{{requestedProduct.title}}</td>
+                <td class="product-link"><a href="{{requestedProduct.link}}">{{requestedProduct.link}}</a></td>
+                <td class="product-qty">{% if requestedProduct.quoted %}<span class="label label-success" >Quoted</span>{% else %} <span class="label label-danger" >Not Quoted</span>{% endif %}</td>
+                <td class="product-qty">{{requestedProduct.number}}</td>
+                <td class="text-xs-left product-remove">
+                    <i class="fa fa-close"></i>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
