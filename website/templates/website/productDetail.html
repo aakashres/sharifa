@@ -71,7 +71,13 @@
                     </tr>
                     <tr>
                         <td>Image</td>
-                        <td><img src="{{product.photo.url}}"/ height="250px"> </td>
+                        <td>
+                        {% if product.photo %}
+                        <img src="{{product.photo.url}}"/ height="250px">
+                        {% else %}
+                        No photo
+                        {% endif %}
+                        </td>
                     </tr>
                 </tbody>
             </table>

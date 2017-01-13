@@ -1,5 +1,9 @@
 {% extends 'layouts/frontend/base.html' %}
 {% load staticfiles %}
+{% block head_title %}
+    {{block.super}} | Shops
+{% endblock %}
+
 
 {% block extra_head %}
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
@@ -46,7 +50,7 @@
             </tbody>
           </table>
         </div>
-          
+
         </div>
       </div>
     </div>

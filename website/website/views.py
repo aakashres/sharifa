@@ -11,7 +11,6 @@ from django.http import HttpResponseRedirect
 from django.utils.text import slugify
 
 from django.contrib.auth import authenticate, login, logout
-from django.contrib import messages
 from django.contrib.auth.models import User
 import random
 import string
@@ -180,6 +179,11 @@ class QuotationCreateView(SuccessMessageMixin, CreateView):
     def dispatch(self, request, *args, **kwargs):
         id = kwargs['id']
         self.requested_product = RequestedProduct.objects.get(pk=id)
+        quotation = Quotation.objects.filter(
+            requested_product=self.requested_product).first()
+        if quotation:
+            messages.warning(request, "Quotation Alredy Created.")
+            return redirect('website:requewstProductList')
         return super(QuotationCreateView, self).dispatch(request, *args, **kwargs)
 
     def form_valid(self, form, **kwargs):
