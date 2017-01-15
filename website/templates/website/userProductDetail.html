@@ -1,0 +1,174 @@
+{% extends 'layouts/frontend/base.html' %}
+{% load staticfiles %}
+
+{% block head_title %}
+    {{block.super}} | Product Detail
+{% endblock %}
+
+{% block breadcrumb %}
+<div class="page-title" style="background-image: url('{% static "frontend-assets/images/title/bg01.jpg" %}')">
+  <div class="container">
+    <h1 class="entry-title"> {{product.title}} </h1>
+    <ol class="breadcrumb">
+      <li><a href="#">Home</a></li>
+      <li><a href="{% url 'website:userProductList' %}">Products</a></li>
+      <li class="active"> {{product.title}} </li>
+    </ol>
+  </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <main id="content" class="col-lg-9" role="main">
+
+      <article class="post has-post-thumbnail hentry">
+        <div class="post-image">
+          <div class="dates">
+            <span class="month">July</span>
+            <span class="date">06</span>
+            <span class="year">2015</span>
+          </div>
+          <img class="img-fluid  attachment-post-thumbnail" src="{% static 'frontend-assets/images/posts/870x480/post-image_01.jpg' %}" alt="hero-bg">
+        </div>
+        <!-- post-image -->
+
+        <header class="entry-header">
+          <h3 class="entry-title">{{product.title}}</h3>
+          <div class="post-details">
+            <i class="fa fa-user"></i>  Posted by <a href="#" >admin</a>
+          </div>
+        </header>
+        <div class="post-excerpt">
+        {{product.description}}
+        </div><!-- post-excerpt -->
+        <hr>
+        <table class="table table-reflow table-responsive table-sm table-cart-totals">
+          <thead>
+          <tr>
+            <th>Category:</th>
+            <th>Price:</th>
+            <th>Sales Tax:</th>
+            <th>Domestic Shipping:</th>
+            <th>Height:</th>
+            <th>Length:</th>
+            <th>Width:</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr scope="row">
+            <td><a href="{% url 'website:userItemCategoryDetail' product.category.slug %}">{{product.category.title}}</a></td>
+            <td>Rs. {{product.price}}</td>
+            <td>{{product.approx_taxes}}%</td>
+            <td>{{product.domestic_shipping}}%</td>
+            <td>{{product.height}}</td>
+            <td>{{product.length}}</td>
+            <td>{{product.weight}}</td>
+           </tr>
+          </tbody>
+        </table>
+        <div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="custom-heading part-heading three-slashes">
+        <h2>Price Estimation</h2>
+      </div>
+      <form action="." method="POST">
+      {% csrf_token %}
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="form-group">
+            {{form.price}}
+            </div>
+            <div class="form-group">
+            {{form.sales_tax}}
+            </div>
+            <div class="form-group">
+            {{form.domestic_shipping}}
+            </div>
+            <div class="form-group">
+            {{form.shipping_type}}
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="form-group">
+            {{form.weight}}
+            </div>
+            <div class="form-group">
+            {{form.length}}
+            </div>
+            <div class="form-group">
+            {{form.width}}
+            </div>
+            <div class="form-group">
+            {{form.height}}
+            </div>
+          </div>
+          <div class="col-lg-12">
+          <button type="submit" class=" text-xs-center btn btn-primary">CALCULATE</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+      </article>
+    </main>
+    <aside class="col-lg-3 sidebar">
+      <!-- SEARCH -->
+      <aside class="widget widget_search">
+      <form  action="{% url 'website:userProductList' %}" method="GET">
+        <div class="input-group">
+          <input name="q" type="search" class="form-control" placeholder="Search for..." value="{{request.GET.q}}">
+          <span class="input-group-btn">
+            <button class="btn btn-secondary search-submit" type="button"><i class="fa fa-search"></i></button>
+          </span>
+        </div>
+      </form>
+      </aside>
+
+      <!-- RECENT POSTS -->
+      <aside class="widget widget_text">
+        <h3 class="widget-title">Similar Products</h3>
+        <div class="textwidget">
+          <div class="recent-posts type_1">
+            <div class="recent-posts-item">
+              <div class="recent-posts-thumb">
+                <a href="http://transport.thememove.com/2015/06/26/freight-transport-in-alaska-the-haul-of-the-wild/">
+                  <img width="120" height="90" src="{% static 'frontend-assets/images/posts/870x480/post-image_01.jpg' %}" class="attachment-small-thumb wp-post-image" alt="image_900x600_06"></a>
+              </div>
+              <a href="http://transport.thememove.com/2015/06/26/freight-transport-in-alaska-the-haul-of-the-wild/">Freight Transport in Alaska: The Haul of the Wild</a>
+            </div>
+            <div class="recent-posts-item">
+              <div class="recent-posts-thumb">
+                <a href="http://transport.thememove.com/2015/06/26/reducing-freight-costs/">
+                  <img width="120" height="90" src="{% static 'frontend-assets/images/posts/870x480/post-image_01.jpg' %}" class="attachment-small-thumb wp-post-image" alt="image_900x600_07"></a>
+              </div>
+              <a href="http://transport.thememove.com/2015/06/26/reducing-freight-costs/">Reducing Freight Costs</a>
+            </div>
+            <div class="recent-posts-item">
+              <div class="recent-posts-thumb">
+                <a href="http://transport.thememove.com/2015/06/23/perishable-logistics-cold-chain-on-a-plane/">
+                  <img width="120" height="90" src="{% static 'frontend-assets/images/posts/870x480/post-image_01.jpg' %}" class="attachment-small-thumb wp-post-image" alt="image_900x600_05"></a>
+              </div>
+              <a href="http://transport.thememove.com/2015/06/23/perishable-logistics-cold-chain-on-a-plane/">Perishable Logistics: Cold Chain on a Plane</a>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <aside class="widget widget_meta">
+        <h3 class="widget-title">CUSTOM LINKS</h3>
+        <ul class="list-group">
+          <li class="list-group-item"><a href="#">Log in</a></li>
+          <li class="list-group-item"><a href="#">Entries <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+          <li class="list-group-item"><a href="#">Comments <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+          <li class="list-group-item"><a href="#" title="Powered by WordPress, state-of-the-art semantic personal publishing platform.">WordPress.org</a></li>
+        </ul>
+      </aside>
+    </aside>
+
+  </div>
+</div>
+{% endblock %}

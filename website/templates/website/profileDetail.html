@@ -1,4 +1,22 @@
 {% extends 'layouts/frontend/base.html' %}
+{% load staticfiles %}
+
+{% block head_title %}
+    {{block.super}} | Profile
+{% endblock %}
+
+
+{% block breadcrumb %}
+<div class="page-title" style="background-image: url('{% static "frontend-assets/images/title/bg01.jpg" %}')">
+  <div class="container">
+    <h1 class="entry-title"> Profile </h1>
+    <ol class="breadcrumb">
+      <li><a href="#">Home</a></li>
+      <li class="active"> Profile</li>
+    </ol>
+  </div>
+</div>
+{% endblock %}
 
 {% block content%}
 {{userProfile.user.username}}

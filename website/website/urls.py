@@ -114,5 +114,10 @@ urlpatterns = [
         UserItemCategoryDetailView.as_view(), name='userItemCategoryDetail'),
     url(r'^contact/$', ContactView.as_view(), name='contact'),
 
+    url(r'^products/$',
+        UserProductListView.as_view(), name='userProductList'),
+    url(r'^products/(?P<slug>[\w-]+)/$',
+        UserProductDetailView.as_view(), name='userProductDetail'),
+
 
 ]

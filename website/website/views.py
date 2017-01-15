@@ -9,6 +9,7 @@ from django.core.urlresolvers import reverse_lazy, reverse
 from django.contrib.auth.models import Group
 from django.http import HttpResponseRedirect
 from django.utils.text import slugify
+from django.db.models import Q
 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
@@ -512,7 +513,7 @@ class UserItemCategoryDetailView(FormView):
         return context
 
     def get_success_url(self):
-        return reverse("website: userItemCategoryDetailView", kwargs={'slug': self.itemCategory.slug})
+        return reverse('website:userItemCategoryDetail', kwargs={'slug': self.itemCategory.slug})
 
 
 class UserShopListView(ListView):
@@ -598,3 +599,44 @@ class BuyMembership(View):
             ';').index(membership.replace('membership', ''))
         userMembership.save()
         return redirect(reverse_lazy("website:dashboard"))
+
+
+class UserProductDetailView(FormView):
+    template_name = 'website/userProductDetail.html'
+    form_class = EstimateForm
+
+    def dispatch(self, request, *args, **kwargs):
+        self.product = Product.objects.filter(
+            slug=kwargs['slug']).first()
+        return super(UserProductDetailView, self).dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(UserProductDetailView,
+                        self).get_context_data(**kwargs)
+        context['product'] = self.product
+        return context
+
+    def get_initial(self):
+        initial = super(UserProductDetailView, self).get_initial()
+        return initial
+
+    def get_success_url(self):
+        return reverse('website:userProductDetail', kwargs={'slug': self.product.slug})
+
+
+
+class UserProductListView(ListView):
+    model = Product
+    template_name = 'website/userProductList.html'
+    context_object_name = 'products'
+    paginate_by = 1
+
+    def get_queryset(self):
+        products = Product.objects.filter(deleted_at=None)
+        query = self.request.GET.get("q")
+        if query:
+            products = products.filter(
+                Q(title__icontains=query) |
+                Q(category__title__icontains=query)
+            ).distinct()
+        return products

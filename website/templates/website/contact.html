@@ -1,6 +1,10 @@
 {% extends 'layouts/frontend/base.html' %}
 {% load staticfiles %}
 
+{% block head_title %}
+    {{block.super}} | Contact Us
+{% endblock %}
+
 
 {% block breadcrumb %}
 <div class="page-title" style="background-image: url('{% static "frontend-assets/images/title/bg01.jpg" %}')">

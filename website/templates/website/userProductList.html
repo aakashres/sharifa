@@ -1,0 +1,106 @@
+{% extends 'layouts/frontend/base.html' %}
+{% load staticfiles %}
+
+{% block head_title %}
+    {{block.super}} | Product List
+{% endblock %}
+
+{% block breadcrumb %}
+<div class="page-title" style="background-image: url('{% static "frontend-assets/images/title/bg01.jpg" %}')">
+  <div class="container">
+    <h1 class="entry-title"> Products </h1>
+    <ol class="breadcrumb">
+      <li><a href="#">Home</a></li>
+      <li class="active"> Products</li>
+    </ol>
+  </div>
+</div>
+{% endblock %}
+
+{% block content %}
+  <div class="blog-grid">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4">
+          <article class="post has-post-thumbnail hentry">
+            <div class="post-image">
+              <div class="dates">
+                <span class="month">June</span>
+                <span class="date">26</span>
+                <span class="year">2015</span>
+              </div>
+              <img class="img-fluid" src="{% static 'frontend-assets/images/posts/370x220/post-image_01.jpg' %}" alt="hero-bg">
+            </div>
+          <!-- post-image -->
+            <header class="entry-header">
+              <h3 class="entry-title"><a href="#">11 Times Old Furniture Gained New Life</a></h3>
+              <div class="post-details">
+                <i class="fa fa-user"></i>  Posted by <a href="#" >admin</a>
+                <i class="fa fa-folder-open"></i> in <a href="#" rel="category tag">Blog </a>
+              </div>
+            <!-- post-details -->
+            </header>
+          <!-- .entry-header -->
+            <div class="post-excerpt">
+              <p>Alaska distinguishes itself from the lower 48 states by its abundance of natural resources—crude oil, natural gas, and seafood—as well […]</p>
+            </div><!-- post-excerpt -->
+            <a class="read-more" href="#"><span>READ MORE</span><i class="fa fa-arrow-right"></i></a>
+          </article>
+        </div>
+      </div>
+
+      {% if is_paginated %}
+      <nav>
+        <ul class="pagination">
+         {% if page_obj.has_previous %}
+          <li class="page-item">
+            <a class="page-link nav-text nav-text-prev" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+            <span aria-hidden="true"><i class="fa fa-arrow-left"></i></span>
+            <span>PREVIOUS</span>
+            </a>
+          </li>
+          {% else %}
+          <li class="page-item">
+            <a class="page-link nav-text nav-text-prev disabled" href="#" aria-label="Previous">
+            <span aria-hidden="true"><i class="fa fa-arrow-left"></i></span>
+            <span>PREVIOUS</span>
+            </a>
+          </li>
+          {% endif %}
+
+          {% for page in page_obj.paginator.page_range %}
+            {% if page %}
+              {% ifequal page page_obj.number %}
+                <li class="page-item active">
+                  <a class="page-link" href="?page={{ page }} ">{{page}} <span class="sr-only">(current)</span></a>
+                </li>
+              {% else %}
+                <li class="page-item"><a class="page-link" href="?page={{ page }} ">{{page}}</a></li>
+              {% endifequal %}
+            {% else %}
+                <li><a>...</a></li>
+            {% endif %}
+          {% endfor %}
+          {% if page_obj.has_next %}
+          <li class="page-item">
+            <a class="page-link nav-text nav-text-next" href="?page={{ page_obj.next_page_number }}" aria-label="NEXT">
+            <span>NEXT</span>
+            <span aria-hidden="true"><i class="fa fa-arrow-right"></i></span>
+            </a>
+          </li>
+          {% else %}
+          <li class="page-item">
+            <a class="page-link nav-text nav-text-next disabled" href="" aria-label="NEXT">
+            <span>NEXT</span>
+            <span aria-hidden="true"><i class="fa fa-arrow-right"></i></span>
+            </a>
+          </li>
+          {% endif %}
+        </ul>
+      </nav>
+      {% endif %}
+    </div>
+  </div>
+
+
+{% endblock %}
