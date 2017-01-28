@@ -19,9 +19,6 @@
 {% endblock %}
 
 {% block content %}
-<div id="map-canvas" class="thememove-gmaps" data-address="40.7590615,-73.969231" data-height="480" data-width="100%" data-zoom_enable="" data-zoom="16" data-map_type="roadmap" data-map_style="style1"></div>
-
-
 <section class="info-contact">
   <div class="container">
     <div class="row">
@@ -59,12 +56,8 @@
               <div class="col-lg-6">
                 {{form.email}}
               </div>
-              <div class="col-lg-6">
+              <div class="col-xs-12">
                 {{form.subject}}
-              </div>
-
-              <div class="col-lg-6">
-                {{form.phone}}
               </div>
               <div class="col-xs-12">
                 {{form.message}}
@@ -80,6 +73,9 @@
     </div>
   </div>
 </section>
+
+<div id="map-canvas" class="thememove-gmaps" data-address="40.7590615,-73.969231" data-height="480" data-width="100%" data-zoom_enable="" data-zoom="16" data-map_type="roadmap" data-map_style="style1"></div>
+
 
 {% endblock %}
 

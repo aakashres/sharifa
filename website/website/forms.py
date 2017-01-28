@@ -243,8 +243,6 @@ class ContactForm(forms.Form):
                              widget=forms.TextInput(attrs={'placeholder': 'Your Email'}))
     subject = forms.CharField(max_length=30, label='Subject',
                               widget=forms.TextInput(attrs={'placeholder': 'Subject'}))
-    phone = forms.CharField(max_length=30, label='Phone',
-                            widget=forms.TextInput(attrs={'placeholder': 'Phone'}))
     message = forms.CharField(max_length=30, label='Message',
                               widget=forms.Textarea(attrs={'placeholder': 'Your Message'}))
 
@@ -253,7 +251,6 @@ class ContactForm(forms.Form):
             "name",
             "email",
             "subject",
-            "phone",
             "message"
         ]
 

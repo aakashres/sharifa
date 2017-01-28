@@ -1,5 +1,6 @@
 from django.views.generic import View, ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView, FormView
 from django.shortcuts import render, redirect, get_object_or_404
+from django.core.mail import send_mail
 from django.utils import timezone
 from datetime import timedelta
 # from django.contrib.auth.mixins import LoginRequiredMixin
@@ -531,6 +532,13 @@ class ContactView(SuccessMessageMixin, FormView):
     success_message = "Email Sent Successfully"
     success_url = reverse_lazy("website:contactView")
 
+    def post(self, request, **kwargs):
+        form = ContactForm(request.POST or None)
+        if form.is_valid():
+            send_mail(
+            )
+        return redirect("website:productList")
+
 
 class ProfileUpdateView(View):
     def get(self, request, **kwargs):
@@ -622,7 +630,6 @@ class UserProductDetailView(FormView):
 
     def get_success_url(self):
         return reverse('website:userProductDetail', kwargs={'slug': self.product.slug})
-
 
 
 class UserProductListView(ListView):

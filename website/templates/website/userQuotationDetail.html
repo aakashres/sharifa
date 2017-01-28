@@ -29,55 +29,62 @@
           <h2>Requested Product</h2>
           <div class="table-responsive table-shopping-cart">
           <table class="table">
-            <thead class="thead-inverse">
-            <tr>
-              <th class="text-left">Product Title</th>
-              <th class="text-left">Product Remark</th>
-              <th class="text-left">Link</th>
-              <th class="text-left">Status</th>
-              <th class="text-left">Quantity</th>
-            </tr>
-            </thead>
             <tbody>
               <tr class="row-xs-center">
+                <td class="text-left">Product Title</th>
                 <td class="product-title">{{quotation.requested_product.title}}</td>
-                <td class="product-title">{{quotation.requested_product.remark}}</td>
-                <td class="product-link"><a href="{{quotation.requested_product.link}}">{{quotation.requested_product.link}}</a></td>
+              </tr>
+              <tr class="row-xs-center">
+                <td class="text-left">Link</th>
+                <td class="product-link"><a href="{{quotation.requested_product.link}}" target="_blank">{{quotation.requested_product.link}}</a></td>
+              </tr>
+              <tr class="row-xs-center">
+                <td class="text-left">Status</th>
                 <td class="product-qty">{% if quotation.requested_product.quoted %}<span class="label label-success" >Quoted</span>{% else %} <span class="label label-danger" >Not Quoted</span>{% endif %}</td>
+              </tr>
+              <tr class="row-xs-center">
+                <td class="text-left">Quantity</th>
                 <td class="product-qty">{{quotation.requested_product.number}}</td>
+              </tr>
+              <tr class="row-xs-center">
+                <td class="text-left">Product Remarks</th>
+                <td class="product-qty">{{quotation.requested_product.remarks}}</td>
               </tr>
             </tbody>
           </table>
-          </div>
+        </td>
         </div>
         <div class="custom-heading part-heading three-slashes">
           <h2>Quotation</h2>
-          <div class="table-responsive table-shopping-cart">
-          <table class="table">
-            <thead class="thead-inverse">
-            <tr>
-              <th class="text-left">Product Title</th>
-              <th class="text-left">Link</th>
-              <th class="text-left">Status</th>
-              <th class="text-left">Quantity</th>
-              <th class="text-center">Remove</th>
-            </tr>
-            </thead>
-            <tbody>
-              {% for requestedProduct in requestedProducts %}
-              <tr class="row-xs-center">
-                <td class="product-title">{{requestedProduct.title}}</td>
-                <td class="product-link"><a href="{{requestedProduct.link}}">{{requestedProduct.link}}</a></td>
-                <td class="product-qty">{% if requestedProduct.quoted %}<span class="label label-success" >Quoted</span>{% else %} <span class="label label-danger" >Not Quoted</span>{% endif %}</td>
-                <td class="product-qty">{{requestedProduct.number}}</td>
-                <td class="text-xs-left product-remove">
-                    <i class="fa fa-close"></i>
-                </td>
-              </tr>
-              {% endfor %}
-            </tbody>
-          </table>
-          </div>
+         <div class="row">
+        <div class="col-lg-12" >
+        <table class="table table-reflow table-responsive table-sm table-cart-totals">
+          <thead>
+          <tr>
+            <th>Category:</th>
+            <th>Price:</th>
+            <th>Sales Tax:</th>
+            <th>Domestic Shipping:</th>
+            <th>Height:</th>
+            <th>Length:</th>
+            <th>Width:</th>
+            <th>Status:</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr scope="row">
+            <td><a href="{% url 'website:userItemCategoryDetail' quotation.category.slug %}">{{quotation.category.title}}</a></td>
+            <td>Rs. {{quotation.price}}</td>
+            <td>{{quotation.approx_taxes}}%</td>
+            <td>{{quotation.domestic_shipping}}%</td>
+            <td>{{quotation.height}}</td>
+            <td>{{quotation.length}}</td>
+            <td>{{quotation.weight}}</td>
+           </tr>
+          </tbody>
+        </table>
+        </div>
+        </div>
         </div>
       </div>
     </div>
