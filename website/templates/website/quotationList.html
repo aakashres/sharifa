@@ -34,7 +34,7 @@
                             <tbody>
                                 {% for quotation in quotations %}
                                     <tr>
-                                        <td>{{quotation.requested_product.title}}</td>
+                                        <td><a href="{% url 'website:quotationDetail' quotation.id %}"> {{quotation.requested_product.title}}</td>
                                         <td>{{quotation.quoted_by.username}}</td>
                                         <td>{{quotation.category.title}}</td>
                                          <td>

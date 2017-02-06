@@ -35,7 +35,7 @@
                             <tbody>
                                 {% for requestProduct in requestProducts %}
                                     <tr>
-                                        <td>{{requestProduct.title}}</td>
+                                        <td><a href="{% url 'website:requestProductDetail' requestProduct.id %}">{{requestProduct.title}}</td>
                                         <td>{{requestProduct.user.username}}</td>
                                         <td><a href="{{requestedProduct}}" target="_blank">{{requestProduct.link}}</a></td>
                                         <td>{{requestProduct.membership}}</td>
